@@ -1,6 +1,6 @@
-A simple store mad in spring boot.<br/><br/>
+# A simple store made in spring boot.<br/><br/>
 
-Features:<br/>
+## Features:<br/>
 Sign in and Sing up, <br/>
 Account data edition, <br/>
 Admin panel - managing and viewing orders, adding and removing products, <br/>
