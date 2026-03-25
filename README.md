@@ -1,8 +1,8 @@
 A simple store mad in spring boot.
 
 Features:
-Sign in and Sing up,
-Account data edition,
+Sign in and Sing up, \n
+Account data edition, \n
 Admin panel - managing and viewing orders, adding and removing products,
 Store,
 Cart,
