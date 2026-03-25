@@ -11,4 +11,4 @@ Discount Coupons,
 H2 Database for storing products, users, orders and coupons,
 
 
-![alt text]()
+![alt text](https://github.com/SzymonFromPoland/My-Store-Website/blob/main/image1.png)
