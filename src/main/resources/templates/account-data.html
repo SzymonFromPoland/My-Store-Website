@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div class="account">
+    <div class="window">
+        <div th:replace="~{fragments/account-navig :: navig}"></div>
+        <div class="data">
+            <form th:action="@{/account/data}" method="post">
+                <h1>Your data</h1>
+                <p>Name</p>
+                <label>
+                    <input type="text" name="firstName" class="dataInput" th:value="${firstName}">
+                </label>
+
+                <p>Last name</p>
+                <label>
+                    <input type="text" name="lastName" class="dataInput" th:value="${lastName}">
+                </label>
+
+                <p>Email address</p>
+                <label>
+                    <input type="text" name="email" class="dataInput" th:value="${email}">
+                </label>
+
+                <button type="submit" class="saveButton"><img th:src="@{/images/icons/save.png}" alt="icon" class="navigImg"> Save changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

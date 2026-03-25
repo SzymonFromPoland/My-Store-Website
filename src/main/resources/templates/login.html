@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+  <div th:replace="~{fragments/navigation :: head}"></div>
+  <div class="loginPage">
+    <div class="loginBox">
+      <h2>Sign in</h2>
+      <div th:if="${param.error}" class="loginFailed">
+        Failed to sign in. Check if password and username is correct.
+      </div>
+      <form method="post" th:action="@{/login}" class="loginInput">
+        <label for="username"></label><input class="emailInput" type="text" name="username" id="username" placeholder="Username" required>
+        <label for="password"></label><input class="passwordInput" type="password" name="password" id="password"  placeholder="Password" required>
+        <div class="row">
+          <input type="checkbox" id="rememberMe" name="remember-me" value="True">
+          <label for="rememberMe" style="margin-left: 8px">Remember me</label>
+        </div>
+        <button type="submit" class="loginButton">Sing in</button>
+      </form>
+
+      <div class="row">
+        <span style="font-weight: normal; margin-right: 6px">Don't have an account?</span>
+        <a th:href="@{/register}">Sign up</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

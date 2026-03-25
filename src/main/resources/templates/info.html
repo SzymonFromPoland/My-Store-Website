@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Information</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div style="font-family: Arial, sans-serif; max-width: 900px; margin: 60px auto; padding: 0 30px;">
+
+    <h1 style="font-size: 38px; color: #21283A; margin-bottom: 8px;">Information</h1>
+    <p style="color: #555; font-size: 17px; margin-bottom: 40px;">Everything you need to know about shopping with us.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+
+        <div style="border: 2px solid #21283A; border-radius: 12px; padding: 28px;">
+            <h2 style="margin: 0 0 10px; color: #21283A;">Shipping Policy</h2>
+            <p style="margin: 0; color: #555; line-height: 1.7;">
+                We ship to all EU countries and selected international destinations. Standard delivery takes 3–5 business days.
+                Express delivery (1–2 days) is available at checkout. Orders placed before 2pm are processed the same day.
+                Free shipping applies to all orders over $50.
+            </p>
+        </div>
+
+        <div style="border: 2px solid #21283A; border-radius: 12px; padding: 28px;">
+            <h2 style="margin: 0 0 10px; color: #21283A;">Returns &amp; Refunds</h2>
+            <p style="margin: 0; color: #555; line-height: 1.7;">
+                You may return any item within 30 days of delivery for a full refund. Items must be unused and in original packaging.
+                To start a return, contact our support team with your order number. Refunds are processed within 5 business days.
+            </p>
+        </div>
+
+        <div style="border: 2px solid #21283A; border-radius: 12px; padding: 28px;">
+            <h2 style="margin: 0 0 10px; color: #21283A;">Payment Methods</h2>
+            <p style="margin: 0; color: #555; line-height: 1.7;">
+                We accept all major credit and debit cards (Visa, Mastercard, American Express), PayPal, and bank transfers.
+                All payments are secured with 256-bit SSL encryption.
+            </p>
+        </div>
+
+        <div style="border: 2px solid #21283A; border-radius: 12px; padding: 28px;">
+            <h2 style="margin: 0 0 10px; color: #21283A;">Privacy &amp; Data</h2>
+            <p style="margin: 0; color: #555; line-height: 1.7;">
+                We take your privacy seriously. Your personal data is never sold to third parties and is only used to process your orders
+                and improve your shopping experience. See our full Privacy Policy for details.
+            </p>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

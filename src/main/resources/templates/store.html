@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{/fragments/navigation :: head}"></div>
+
+<div class="row" style="align-items: center; padding: 16px 20px; gap: 0;">
+    <form class="search" th:action="@{/store}" method="get" onsubmit="return handleSearch(this)">
+        <input class="searchInput" name="input" type="text" placeholder="Search Products...">
+        <button class="searchBtn" type="submit">Search</button>
+    </form>
+
+    <div class="range_container">
+        <label>Price range</label>
+        <div class="range_row">
+            <input class="form_control_container__time__input" type="number" id="fromInput" value="0" min="0" max="10000"/>
+            <div class="sliders_control">
+                <input id="fromSlider" type="range" value="0" min="0" max="10000"/>
+                <input id="toSlider" type="range" value="10000" min="0" max="10000"/>
+            </div>
+            <input class="form_control_container__time__input" type="number" id="toInput" value="10000" min="0" max="10000"/>
+        </div>
+    </div>
+</div>
+<div class="store">
+    <div id="cartNotification" class="cartNotification" th:if="${param.added != null}">
+        <span>Item added to your cart!</span>
+        <div class="cartNotificationButtons">
+            <a th:href="@{/account/cart}" class="cartNotificationBtn cartNotificationBtnCart">View Cart</a>
+            <button class="cartNotificationBtn cartNotificationBtnContinue" onclick="closeCartNotification()">Continue
+                Shopping
+            </button>
+        </div>
+    </div>
+
+    <div class="productList">
+        <div class="productBox" th:each="product : ${products}">
+            <form method="post" th:action="@{/account/add-to-cart(id=${product.id})}"
+                  style="height: 100%; flex-direction: column; display: flex; gap: 9px">
+                <a th:href="@{/store/product/{id}(id=${product.id})}">
+                    <img th:src="'data:image/jpeg;base64,' + ${product.image}" alt="product image" class="image"/>
+                </a>
+                <a th:href="@{/store/product/{id}(id=${product.id})}" class="productLink"
+                   style="align-self: center; font-weight: bold; font-size: 15px; text-decoration: none; color: inherit"
+                   th:text="${product.name}"></a>
+                <p class="description" th:text="${product.description}"></p>
+                <div class="row">
+                    <span style="font-weight: bold; margin-right: 6px">ID:</span>
+                    <span style="font-weight: bold" th:text="${product.id}"></span>
+                </div>
+
+                <div class="row">
+                    <span style="font-weight: bold; margin-right: 6px">On stock:</span>
+                    <span style="font-weight: bold" th:text="${product.stock}"></span>
+                </div>
+
+                <div class="priceRow">
+                    <p class="price" th:text="'$'+ ${product.price}"></p>
+                    <button class="cartButton"><img class="imageButton" th:src="@{/images/icons/cart.png}" alt="cart">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="productControlPanel" sec:authorize="hasRole('ROLE_ADMIN')">
+        <h1 style="margin: 8px 0">Admin panel</h1>
+        <form method="post" th:action="@{/create}" enctype="multipart/form-data" style="margin-bottom: 25px">
+            <label>
+                <input name="name" type="text" class="name" placeholder="Name" required>
+            </label>
+            <label>
+                <input name="description" type="text" class="description" placeholder="Description" required>
+            </label>
+            <label>
+                <input name="price" type="text" class="price" placeholder="Price in USD" required>
+            </label>
+
+            <input name="image" type="file" alt="file" class="image" placeholder="Image" accept="image/png" required>
+
+            <button type="submit">Add Product</button>
+        </form>
+
+        <form method="get" th:action="@{/create-samples}">
+            <button type="submit">Generate samples</button>
+        </form>
+
+        <form method="get" th:action="@{/clear}">
+            <button type="submit">Delete all products</button>
+        </form>
+
+        <form method="get" th:action="@{/clear-orders}">
+            <button type="submit">Delete all orders</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function handleSearch(form) {
+        const input = form.querySelector('input[name="input"]').value.trim();
+        const url = new URL(window.location.href);
+        if (!input) {
+            url.searchParams.delete('input');
+        } else {
+            url.searchParams.set('input', input);
+        }
+        window.location.href = url.toString();
+        return false;
+    }
+
+    function closeCartNotification() {
+        document.getElementById('cartNotification').style.display = 'none';
+    }
+
+    // Auto-hide after 5 seconds
+    setTimeout(function () {
+        var n = document.getElementById('cartNotification');
+        if (n) n.style.display = 'none';
+    }, 5000);
+
+    function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
+        const [from, to] = getParsed(fromInput, toInput);
+        fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
+        if (from > to) {
+            fromSlider.value = to;
+            fromInput.value = to;
+        } else {
+            fromSlider.value = from;
+        }
+    }
+
+    function controlToInput(toSlider, fromInput, toInput, controlSlider) {
+        const [from, to] = getParsed(fromInput, toInput);
+        fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
+        setToggleAccessible(toInput);
+        if (from <= to) {
+            toSlider.value = to;
+            toInput.value = to;
+        } else {
+            toInput.value = from;
+        }
+    }
+
+    function controlFromSlider(fromSlider, toSlider, fromInput) {
+        const [from, to] = getParsed(fromSlider, toSlider);
+        fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
+        if (from > to) {
+            fromSlider.value = to;
+            fromInput.value = to;
+        } else {
+            fromInput.value = from;
+        }
+    }
+
+    function controlToSlider(fromSlider, toSlider, toInput) {
+        const [from, to] = getParsed(fromSlider, toSlider);
+        fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
+        setToggleAccessible(toSlider);
+        if (from <= to) {
+            toSlider.value = to;
+            toInput.value = to;
+        } else {
+            toInput.value = from;
+            toSlider.value = from;
+        }
+    }
+
+    function getParsed(currentFrom, currentTo) {
+        const from = parseInt(currentFrom.value, 10);
+        const to = parseInt(currentTo.value, 10);
+        return [from, to];
+    }
+
+    function fillSlider(from, to, sliderColor, rangeColor, controlSlider) {
+        const rangeDistance = to.max - to.min;
+        const fromPosition = from.value - to.min;
+        const toPosition = to.value - to.min;
+        controlSlider.style.background = `linear-gradient(
+      to right,
+      ${sliderColor} 0%,
+      ${sliderColor} ${(fromPosition) / (rangeDistance) * 100}%,
+      ${rangeColor} ${((fromPosition) / (rangeDistance)) * 100}%,
+      ${rangeColor} ${(toPosition) / (rangeDistance) * 100}%,
+      ${sliderColor} ${(toPosition) / (rangeDistance) * 100}%,
+      ${sliderColor} 100%)`;
+    }
+
+    function setToggleAccessible(currentTarget) {
+        const toSlider = document.querySelector('#toSlider');
+        if (Number(currentTarget.value) <= 0) {
+            toSlider.style.zIndex = 2;
+        } else {
+            toSlider.style.zIndex = 0;
+        }
+    }
+
+    const fromSlider = document.querySelector('#fromSlider');
+    const toSlider = document.querySelector('#toSlider');
+    const fromInput = document.querySelector('#fromInput');
+    const toInput = document.querySelector('#toInput');
+
+    // Restore slider positions from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlMin = urlParams.get('min_range');
+    const urlMax = urlParams.get('max_range');
+    if (urlMin !== null && urlMin !== '0') {
+        fromSlider.value = urlMin;
+        fromInput.value = urlMin;
+    }
+    if (urlMax !== null && urlMax !== 'inf') {
+        toSlider.value = urlMax;
+        toInput.value = urlMax;
+    }
+
+    // Restore search input from URL
+    const urlInput = urlParams.get('input');
+    if (urlInput) {
+        document.querySelector('.searchInput').value = urlInput;
+    }
+
+    fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
+    setToggleAccessible(toSlider);
+
+    let rangeDebounce = null;
+    function scheduleRangeFetch() {
+        clearTimeout(rangeDebounce);
+        rangeDebounce = setTimeout(() => {
+            const url = new URL(window.location.href);
+            const minVal = parseInt(fromInput.value, 10);
+            const maxVal = parseInt(toInput.value, 10);
+            const minParam = minVal <= parseInt(fromSlider.min, 10) ? '0' : String(minVal);
+            const maxParam = maxVal >= parseInt(toSlider.max, 10) ? 'inf' : String(maxVal);
+            if (minParam === '0') url.searchParams.delete('min_range');
+            else url.searchParams.set('min_range', minParam);
+            if (maxParam === 'inf') url.searchParams.delete('max_range');
+            else url.searchParams.set('max_range', maxParam);
+            window.location.href = url.toString();
+        }, 1000);
+    }
+
+    fromSlider.oninput = () => { controlFromSlider(fromSlider, toSlider, fromInput); scheduleRangeFetch(); };
+    toSlider.oninput = () => { controlToSlider(fromSlider, toSlider, toInput); scheduleRangeFetch(); };
+    fromInput.oninput = () => { controlFromInput(fromSlider, fromInput, toInput, toSlider); scheduleRangeFetch(); };
+    toInput.oninput = () => { controlToInput(toSlider, fromInput, toInput, toSlider); scheduleRangeFetch(); };
+</script>
+</body>
+</html>

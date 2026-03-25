@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div style="font-family: Arial, sans-serif; max-width: 900px; margin: 60px auto; padding: 0 30px;">
+
+    <h1 style="font-size: 42px; color: #21283A; margin-bottom: 10px;">Welcome to MyWebsite</h1>
+    <p style="font-size: 18px; color: #555; margin-bottom: 40px;">Your one-stop shop for quality products at great prices.</p>
+
+    <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 50px;">
+        <div style="flex: 1; min-width: 220px; border: 2px solid #21283A; border-radius: 12px; padding: 28px 24px;">
+            <h2 style="margin: 0 0 10px; color: #21283A;">Free Shipping</h2>
+            <p style="margin: 0; color: #555;">On all orders over $50. We deliver fast and reliably to your door.</p>
+        </div>
+        <div style="flex: 1; min-width: 220px; border: 2px solid #21283A; border-radius: 12px; padding: 28px 24px;">
+            <h2 style="margin: 0 0 10px; color: #21283A;">Easy Returns</h2>
+            <p style="margin: 0; color: #555;">Not satisfied? Return any item within 30 days for a full refund, no questions asked.</p>
+        </div>
+        <div style="flex: 1; min-width: 220px; border: 2px solid #21283A; border-radius: 12px; padding: 28px 24px;">
+            <h2 style="margin: 0 0 10px; color: #21283A;">Secure Payments</h2>
+            <p style="margin: 0; color: #555;">All transactions are encrypted and protected by industry-standard security.</p>
+        </div>
+    </div>
+
+    <div style="background-color: #21283A; border-radius: 12px; padding: 36px; color: white; margin-bottom: 50px;">
+        <h2 style="margin: 0 0 12px;">New Arrivals This Week</h2>
+        <p style="margin: 0 0 20px; color: #ccc;">Check out our latest products added to the store. Fresh stock every week.</p>
+        <a th:href="@{/store}" style="background-color: white; color: #21283A; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold;">Browse Store</a>
+    </div>
+
+    <h2 style="color: #21283A; margin-bottom: 16px;">Why Shop With Us?</h2>
+    <ul style="color: #555; font-size: 16px; line-height: 2; padding-left: 20px;">
+        <li>Thousands of products across dozens of categories</li>
+        <li>Exclusive coupon codes and loyalty discounts</li>
+        <li>Dedicated customer support 7 days a week</li>
+        <li>Fast order processing and real-time tracking</li>
+    </ul>
+
+</div>
+</body>
+</html>

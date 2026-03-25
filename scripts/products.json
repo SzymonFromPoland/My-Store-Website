@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Sony WH-1000XM5",
+    "description": "High-end noise-cancelling headphones with superior sound quality and comfort.",
+    "price": 399.99,
+    "image_prompt": "A clean photo of Sony WH-1000XM5 headphones on a white background.",
+    "image_file": "sony_wh_1000xm5.png"
+  },
+  {
+    "name": "Logitech MX Keys",
+    "description": "Wireless illuminated keyboard with ergonomic design and seamless device switching.",
+    "price": 99.99,
+    "image_prompt": "A clean photo of Logitech MX Keys keyboard on a white background.",
+    "image_file": "logitech_mx_keys.png"
+  },
+  {
+    "name": "Dell UltraSharp U2720Q",
+    "description": "27-inch 4K monitor with superb color accuracy and USB-C connectivity.",
+    "price": 649.99,
+    "image_prompt": "A clean photo of Dell UltraSharp U2720Q monitor on a white background.",
+    "image_file": "dell_ultrasharp_u2720q.png"
+  },
+  {
+    "name": "iPhone 14 Pro",
+    "description": "Apple's latest smartphone featuring advanced camera system and A16 Bionic chip.",
+    "price": 1099.99,
+    "image_prompt": "A clean photo of iPhone 14 Pro smartphone on a white background.",
+    "image_file": "iphone_14_pro.png"
+  },
+  {
+    "name": "Canon EOS R5",
+    "description": "Mirrorless camera with 45MP resolution and 8K video capabilities.",
+    "price": 3899.99,
+    "image_prompt": "A clean photo of Canon EOS R5 camera on a white background.",
+    "image_file": "canon_eos_r5.png"
+  },
+  {
+    "name": "Samsung Galaxy Watch 5",
+    "description": "Smartwatch with fitness tracking features and long battery life.",
+    "price": 329.99,
+    "image_prompt": "A clean photo of Samsung Galaxy Watch 5 smartwatch on a white background.",
+    "image_file": "samsung_galaxy_watch_5.png"
+  },
+  {
+    "name": "JBL Flip 6",
+    "description": "Portable Bluetooth speaker offering powerful sound and waterproof design.",
+    "price": 129.99,
+    "image_prompt": "A clean photo of JBL Flip 6 speaker on a white background.",
+    "image_file": "jbl_flip_6.png"
+  },
+  {
+    "name": "MacBook Pro 16",
+    "description": "High-performance laptop with M1 chip and Retina display.",
+    "price": 2499.99,
+    "image_prompt": "A clean photo of MacBook Pro 16-inch laptop on a white background.",
+    "image_file": "macbook_pro_16.png"
+  },
+  {
+    "name": "iPad Air (5th Gen)",
+    "description": "Versatile tablet with A15 Bionic chip and 10.9-inch Liquid Retina display.",
+    "price": 599.99,
+    "image_prompt": "A clean photo of iPad Air 5th Gen tablet on a white background.",
+    "image_file": "ipad_air_5th_gen.png"
+  },
+  {
+    "name": "Razer DeathAdder V2",
+    "description": "High-precision gaming mouse with ergonomic design and customizable buttons.",
+    "price": 69.99,
+    "image_prompt": "A clean photo of Razer DeathAdder V2 mouse on a white background.",
+    "image_file": "razer_deathadder_v2.png"
+  },
+  {
+    "name": "Anker PowerCore III Elite",
+    "description": "Portable charger with 26000mAh capacity and fast charging capabilities.",
+    "price": 129.99,
+    "image_prompt": "A clean photo of Anker PowerCore III Elite charger on a white background.",
+    "image_file": "anker_powercore_iii_elite.png"
+  },
+  {
+    "name": "Belkin USB-C to USB-C Cable",
+    "description": "Durable and fast-charging cable suitable for various devices.",
+    "price": 19.99,
+    "image_prompt": "A clean photo of Belkin USB-C to USB-C cable on a white background.",
+    "image_file": "belkin_usb_c_to_usb_c_cable.png"
+  },
+  {
+    "name": "Logitech C920 HD Pro",
+    "description": "HD 1080p webcam with stereo audio and wide-screen capabilities.",
+    "price": 79.99,
+    "image_prompt": "A clean photo of Logitech C920 HD Pro webcam on a white background.",
+    "image_file": "logitech_c920_hd_pro.png"
+  },
+  {
+    "name": "Blue Yeti USB Microphone",
+    "description": "Professional-grade USB microphone perfect for streaming and podcasting.",
+    "price": 129.99,
+    "image_prompt": "A clean photo of Blue Yeti USB microphone on a white background.",
+    "image_file": "blue_yeti_usb_microphone.png"
+  },
+  {
+    "name": "Samsung 970 EVO Plus 1TB",
+    "description": "High-speed NVMe SSD with reliable performance and large storage capacity.",
+    "price": 169.99,
+    "image_prompt": "A clean photo of Samsung 970 EVO Plus SSD on a white background.",
+    "image_file": "samsung_970_evo_plus_1tb.png"
+  },
+  {
+    "name": "Xbox Wireless Controller",
+    "description": "Ergonomic game controller with Bluetooth support and textured grip.",
+    "price": 59.99,
+    "image_prompt": "A clean photo of Xbox Wireless Controller on a white background.",
+    "image_file": "xbox_wireless_controller.png"
+  }
+]

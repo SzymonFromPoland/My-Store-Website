@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .orders-admin {
+            padding: 30px;
+            font-family: Arial, sans-serif;
+        }
+
+        .orders-admin h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th, .orders-table td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        .orders-table th {
+            background-color: #dfdede;
+            font-weight: 600;
+        }
+
+        .orders-table tr:hover td {
+            background-color: #f9f9f9;
+        }
+
+        .orders-table select {
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .orders-table .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .orders-table .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        .orders-table .btn-address {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .orders-table .btn-address:hover {
+            background-color: #2980b9;
+        }
+
+        .no-orders {
+            padding: 40px;
+            text-align: center;
+            color: #999;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div class="orders-admin">
+    <h1>All Orders</h1>
+
+    <div class="no-orders" th:if="${#lists.isEmpty(orders)}">
+        No orders found.
+    </div>
+
+    <table class="orders-table" th:unless="${#lists.isEmpty(orders)}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.userId}"></td>
+            <td th:text="${order.userName} + ' ' + ${order.userLastName}"></td>
+            <td th:text="${order.date}"></td>
+            <td th:text="'$' + ${order.price}"></td>
+            <td th:text="${order.discount != null} ? '-$' + ${order.discount} : '-'"></td>
+            <td th:text="'$' + ${order.actualPrice}"></td>
+            <td>
+                <form th:action="@{/manager/orders/{id}/status(id=${order.id})}" method="post">
+                    <select name="status" onchange="this.form.submit()">
+                        <option value="PENDING" th:selected="${order.status == 'PENDING'}">Pending</option>
+                        <option value="CONFIRMED" th:selected="${order.status == 'CONFIRMED'}">Confirmed</option>
+                        <option value="SHIPPED" th:selected="${order.status == 'SHIPPED'}">Shipped</option>
+                        <option value="DELIVERED" th:selected="${order.status == 'DELIVERED'}">Delivered</option>
+                        <option value="CANCELLED" th:selected="${order.status == 'CANCELLED'}">Cancelled</option>
+                    </select>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/manager/orders/{id}/address(id=${order.id})}" class="btn-address">Show address</a>
+            </td>
+            <td>
+                <form th:action="@{/manager/orders/{id}/delete(id=${order.id})}" method="post">
+                    <button class="btn-delete" type="submit">Remove</button>
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

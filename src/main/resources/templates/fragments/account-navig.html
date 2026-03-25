@@ -1,0 +1,24 @@
+<div th:fragment="navig" class="navig">
+  <a th:href="@{/account/data}" style="text-decoration: none">
+    <button class="navigButton">
+      <img th:src="@{/images/icons/id.png}" alt="icon" class="navigImg">
+      <p>Account data</p>
+    </button>
+  </a>
+
+  <a th:href="@{/account/address}" style="text-decoration: none">
+
+    <button class="navigButton">
+      <img th:src="@{/images/icons/address.png}" alt="icon" class="navigImg">
+      <p>Address</p>
+    </button>
+  </a>
+
+  <a th:href="@{/account/history}" style="text-decoration: none">
+
+    <button class="navigButton" onclick="">
+      <img th:src="@{/images/icons/history.png}" alt="icon" class="navigImg">
+      <p>Order history</p>
+    </button>
+  </a>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div style="font-family: Arial, sans-serif; max-width: 900px; margin: 60px auto; padding: 0 30px;">
+
+    <h1 style="font-size: 38px; color: #21283A; margin-bottom: 8px;">Contact Us</h1>
+    <p style="color: #555; font-size: 17px; margin-bottom: 40px;">Have a question or need help? We're here for you.</p>
+
+    <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+
+        <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="border: 2px solid #21283A; border-radius: 12px; padding: 24px;">
+                <h3 style="margin: 0 0 8px; color: #21283A;">Email</h3>
+                <p style="margin: 0; color: #555;">support@mywebsite.com</p>
+                <p style="margin: 4px 0 0; color: #555;">We reply within 24 hours on business days.</p>
+            </div>
+            <div style="border: 2px solid #21283A; border-radius: 12px; padding: 24px;">
+                <h3 style="margin: 0 0 8px; color: #21283A;">Phone</h3>
+                <p style="margin: 0; color: #555;">+1 (800) 123-4567</p>
+                <p style="margin: 4px 0 0; color: #555;">Monday – Friday, 9am – 5pm CET</p>
+            </div>
+            <div style="border: 2px solid #21283A; border-radius: 12px; padding: 24px;">
+                <h3 style="margin: 0 0 8px; color: #21283A;">Office</h3>
+                <p style="margin: 0; color: #555;">123 Commerce Street<br>Warsaw, 00-001<br>Poland</p>
+            </div>
+        </div>
+
+        <div style="flex: 1; min-width: 260px; border: 2px solid #21283A; border-radius: 12px; padding: 30px; display: flex; flex-direction: column; gap: 14px;">
+            <h2 style="margin: 0 0 4px; color: #21283A;">Send a Message</h2>
+            <input type="text" placeholder="Your name" style="padding: 10px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px;">
+            <input type="email" placeholder="Your email" style="padding: 10px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px;">
+            <textarea placeholder="Your message..." rows="5" style="padding: 10px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; resize: vertical;"></textarea>
+            <button style="height: 42px; background-color: #21283A; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">Send Message</button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<products>
+    <product>
+        <name>Used underwear</name>
+        <description>A little bit used underwear. A great addition to may peoples collection.</description>
+        <price>9.99</price>
+        <image>images/products/used_underwear.png</image>
+        <id>#000001</id>
+    </product>
+
+    <product>
+        <name>New underwear</name>
+        <description>New, unused underwear. Ewww... Who would want that when you can have used underwear.</description>
+        <price>4.99</price>
+        <image>images/products/new_underwear.png</image>
+        <id>#000002</id>
+    </product>
+
+    <product>
+        <name>Michal Kirk</name>
+        <description>We are Michal Kirk! We carry the flame! We'll fight for the goonbell.</description>
+        <price>9999.67</price>
+        <image>images/products/michal_kirk.png</image>
+        <id>#000003</id>
+    </product>
+
+    <product>
+        <name>Jonathan Kler</name>
+        <description>A fine gentlemen without teeth.</description>
+        <price>67.99</price>
+        <image>images/products/john_kler.png</image>
+        <id>#000004</id>
+    </product>
+
+</products>

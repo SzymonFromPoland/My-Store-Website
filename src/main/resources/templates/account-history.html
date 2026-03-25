@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>History</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div class="account">
+    <div class="window">
+        <div th:replace="~{fragments/account-navig :: navig}"></div>
+        <div class="orders">
+            <div class="order" style="height: 25px; background-color: #dfdede">
+                <p>Order ID</p>
+                <p>Date</p>
+                <p>Price</p>
+                <p>Status</p>
+            </div>
+            <div class="order" th:each="order : ${orders}">
+                <p th:text="${order.id}"></p>
+                <p th:text="${order.date}"></p>
+                <p th:text="'$' + ${order.price}"></p>
+                <p th:text="${order.status}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${name}">Product</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{/fragments/navigation :: head}"></div>
+
+<div class="productPage">
+    <div class="productPageBox">
+        <img th:src="'data:image/jpeg;base64,' + ${image}" alt="product image" class="productPageImage"/>
+        <div class="productPageInfo">
+            <form class="row" method="get" th:action="@{/store/product/{id}/delete(id=${id})}">
+                <h1 th:text="${name}"></h1>
+                <button class="trashButton" style="margin-left: auto">
+                    <img th:src="@{/images/icons/trashcan.png}" class="imageButton" alt="delete">
+                </button>
+            </form>
+
+
+            <p th:text="${description}"></p>
+            <div class="row">
+                <span style="font-weight: bold; margin-right: 6px">On stock:</span>
+                <span th:text="${stock}"></span>
+            </div>
+            <p class="productPagePrice" th:text="'$' + ${price}"></p>
+            <form method="post" th:action="@{/account/add-to-cart(id=${id})}">
+                <button class="productPageCartBtn">Add to Cart</button>
+            </form>
+            <a th:href="@{/store}" class="productPageBack">&#8592; Back to Store</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

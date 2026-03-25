@@ -1,0 +1,44 @@
+<div th:fragment="head" class="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" alt="Logo"></a>
+
+    <div class="navs">
+        <a th:href="@{/store}">Store</a>
+        <a th:href="@{/info}">Information</a>
+        <a th:href="@{/support-programs}">Support programs</a>
+        <a th:href="@{/contact}">Contact</a>
+    </div>
+
+    <div class="rightnav">
+        <a th:href="@{/account/cart}" class="cartButton">
+            <img th:src="@{/images/icons/cart_white.png}" alt="user profile img" class="imageButton">
+            Cart
+        </a>
+
+        <div class="user">
+            <button type="button" class="collapsible">
+                <img th:src="@{/images/icons/user.png}" alt="user profile img" class="imageButton">
+                <span sec:authorize="isAuthenticated()" sec:authentication="principal.username"></span>
+                <span sec:authorize="!isAuthenticated()">Log in</span>
+            </button>
+
+            <div class="content">
+                <a th:href="@{/account/data}">Account</a>
+
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="log">
+                    <a th:href="@{/manager/orders}">Orders</a>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" class="log">
+                    <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;"></form>
+                    <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Sign out</a>
+                </div>
+
+                <div sec:authorize="!isAuthenticated()" class="log">
+                    <a th:href="@{/login}">Sign in</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

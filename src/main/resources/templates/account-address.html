@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div class="account">
+    <div class="window">
+        <div th:replace="~{fragments/account-navig :: navig}"></div>
+        <div class="data">
+
+            <div th:if="${param.error}">
+            </div>
+
+            <form th:action="@{/account/address}" method="post">
+                <h1>Your Address</h1>
+                <div style="display: grid; grid-template: repeat(2, auto) / repeat(2, auto); gap: 5px 5px">
+                    <p style="margin: 0 0">Country</p>
+                    <p style="margin: 0 0">City</p>
+                    <label>
+                        <input type="text" name="country" class="dataInput" th:value="${country}" required>
+                    </label>
+                    <label>
+                        <input type="text" name="city" class="dataInput" th:value="${city}" required>
+                    </label>
+                </div>
+
+                <p style="margin: 5px 0">Address</p>
+                <label>
+                    <input type="text" name="address" class="dataInput" style="width: stretch" th:value="${address}"
+                           required>
+                </label>
+
+                <p style="margin: 5px 0">Postal code</p>
+                <label>
+                    <input type="text" name="postal" class="dataInput" th:value="${postal}" required>
+                </label>
+
+                <p style="margin: 5px 0">Phone number</p>
+                <label>
+                    <input type="text" name="phone" class="dataInput" style="width: stretch" th:value="${phone}" placeholder="Include country code (ex. +48)" required>
+                </label>
+
+                <button type="submit" class="saveButton">
+                    <img th:src="@{/images/icons/save.png}" alt="icon" class="navigImg"> Save changes
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

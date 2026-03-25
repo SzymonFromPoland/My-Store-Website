@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Address</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <style>
+        .address-admin {
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+        }
+
+        .address-admin h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .address-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 20px 24px;
+            background-color: #fafafa;
+            margin-bottom: 24px;
+        }
+
+        .address-card .field {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #ececec;
+            font-size: 14px;
+        }
+
+        .address-card .field:last-child {
+            border-bottom: none;
+        }
+
+        .address-card .label {
+            font-weight: 600;
+            width: 140px;
+            flex-shrink: 0;
+            color: #555;
+        }
+
+        .address-card .value {
+            color: #222;
+        }
+
+        .btn-back {
+            background-color: #7f8c8d;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            background-color: #636e72;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: head}"></div>
+
+<div style="display: flex; flex-direction: row; gap: 30px; align-items: flex-start;">
+    <div class="address-admin">
+        <h1>Order #<span th:text="${id}"></span> — Delivery Address</h1>
+
+        <div class="address-card">
+            <div class="field">
+                <span class="label">Name</span>
+                <span class="value" th:text="${userName} + ' ' + ${userLastName}"></span>
+            </div>
+            <div class="field">
+                <span class="label">Address</span>
+                <span class="value" th:text="${address}"></span>
+            </div>
+            <div class="field">
+                <span class="label">City</span>
+                <span class="value" th:text="${city}"></span>
+            </div>
+            <div class="field">
+                <span class="label">Postal Code</span>
+                <span class="value" th:text="${postalCode}"></span>
+            </div>
+            <div class="field">
+                <span class="label">Country</span>
+                <span class="value" th:text="${country}"></span>
+            </div>
+        </div>
+
+        <a th:href="@{/manager/orders}" class="btn-back">&#8592; Back to Orders</a>
+        <a  class="btn-back" onclick="location.reload()">Refresh map</a>
+
+    </div>
+
+    <div id="map" style="height: 600px; flex: 1; margin: 20px; z-index: 0;"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+<script th:inline="javascript">
+    const map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    function searchAddress(address) {
+        fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`, {
+            headers: {'User-Agent': 'MyWebsite/1.0'}
+        })
+            .then(r => r.json())
+            .then(results => {
+                if (!results.length) return;
+                const {lat, lon, display_name} = results[0];
+                L.marker([lat, lon]).addTo(map).bindPopup(display_name).openPopup();
+                map.setView([lat, lon], 13);
+            });
+    }
+
+    const fullAddress = [[${address}]] + ', ' + [[${city}]] + ', ' + [[${postalCode}]] + ', ' + [[${country}]];
+    searchAddress(fullAddress);
+</script>
+
+</body>
+</html>
