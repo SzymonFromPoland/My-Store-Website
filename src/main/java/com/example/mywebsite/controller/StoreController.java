@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -54,12 +55,7 @@ public class StoreController {
         };
 
         for (String[] p : products) {
-            Product product = new Product();
-            product.setName(p[0]);
-            product.setDescription(p[1]);
-            product.setPrice(Double.parseDouble(p[2]));
-            product.setImage(Files.readAllBytes(Path.of(p[3])));
-            productRepository.save(product);
+            productService.createProduct(p[0], p[1], Double.parseDouble(p[2]), Files.readAllBytes(Path.of(p[3])), true, new ArrayList<>(List.of("1", "2", "3")));
         }
 
         return "redirect:/store";
@@ -96,6 +92,8 @@ public class StoreController {
             map.put("price", p.getPrice());
             map.put("stock", p.getStock());
             map.put("image", Base64.getEncoder().encodeToString(p.getImage()));
+            map.put("configurable", p.getConfigurable());
+            map.put("variants", p.getVariants());
 
             boolean show = true;
 
@@ -149,9 +147,11 @@ public class StoreController {
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam String price,
-            @RequestParam("image") MultipartFile image) throws IOException {
+            @RequestParam("image") MultipartFile image,
+            @RequestParam(required = false, defaultValue = "false") boolean configurable,
+            @RequestParam(required = false) List<String> variants) throws IOException {
 
-        String created = productService.createProduct(name, description, Double.parseDouble(price), image);
+        String created = productService.createProduct(name, description, Double.parseDouble(price), image.getBytes(), configurable, variants);
         if (Objects.equals(created, "successful")) {
             return "redirect:/store?successful";
         } else {

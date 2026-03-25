@@ -38,7 +38,10 @@
     </div>
 
     <div class="productList">
-        <div class="productBox" th:each="product : ${products}">
+        <div class="productBox" th:each="product : ${products}" style="position: relative; overflow: hidden;">
+            <div th:if="${product.configurable}" style="position:absolute; top:0; left:0; width:0; height:0; border-style:solid; border-width:52px 52px 0 0; border-color:#7b8fa6 transparent transparent transparent;">
+                <img th:src="@{/images/icons/config.png}" alt="configurable" style="position:absolute; top:-48px; left:4px; width:18px; height:18px; filter:invert(1);">
+            </div>
             <form method="post" th:action="@{/account/add-to-cart(id=${product.id})}"
                   style="height: 100%; flex-direction: column; display: flex; gap: 9px">
                 <a th:href="@{/store/product/{id}(id=${product.id})}">
@@ -116,7 +119,6 @@
         document.getElementById('cartNotification').style.display = 'none';
     }
 
-    // Auto-hide after 5 seconds
     setTimeout(function () {
         var n = document.getElementById('cartNotification');
         if (n) n.style.display = 'none';
@@ -216,7 +218,6 @@
         toInput.value = urlMax;
     }
 
-    // Restore search input from URL
     const urlInput = urlParams.get('input');
     if (urlInput) {
         document.querySelector('.searchInput').value = urlInput;

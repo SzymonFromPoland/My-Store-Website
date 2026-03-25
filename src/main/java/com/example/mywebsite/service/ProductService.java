@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,18 +35,20 @@ public class ProductService {
         return productRepository.existsById(id);
     }
 
-    public String createProduct(String name, String description, Double price, MultipartFile image) throws IOException {
+    public String createProduct(String name, String description, Double price, byte[] image, boolean configurable, List<String> variants) throws IOException {
 
         Product product = new Product();
 
         product.setName(name);
         product.setDescription(description);
         product.setPrice(price);
+        product.setConfigurable(configurable);
+        product.setVariants(variants != null ? variants : new ArrayList<>());
 
         if (image == null) {
             product.setImage(Files.readAllBytes(Path.of("src/main/resources/static/images/products/john_kler.png")));
         } else {
-            product.setImage(image.getBytes());
+            product.setImage(image);
         }
 
         try {

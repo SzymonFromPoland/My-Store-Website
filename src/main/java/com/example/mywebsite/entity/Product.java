@@ -3,6 +3,8 @@ package com.example.mywebsite.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 @Data
@@ -19,6 +21,9 @@ public class Product {
     private String description;
     private Double price;
     private int stock;
+    private Boolean configurable;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> variants;
     @Lob
     private byte[] image;
 }
